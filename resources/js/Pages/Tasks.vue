@@ -60,7 +60,7 @@ const deleteTask = (task) => {
     })
 }
 
-
+// Fetch tasks from the server
 const fetchTasks = () => {
     router.get(route('tasks.index'), {}, {
         onSuccess: (response) => {
@@ -72,7 +72,7 @@ const fetchTasks = () => {
     })
 }
 
-
+// Fetch tasks on component mount
 onMounted(() => {
     if (props.tasks.length === 0) {
         fetchTasks();
