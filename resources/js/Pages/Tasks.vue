@@ -25,42 +25,42 @@ import { reactive, onMounted, defineProps } from 'vue'
 import { useForm, router } from '@inertiajs/vue3'
 
 const props = defineProps({
-    tasks: Array // Define the 'tasks' prop and its type
+    tasks: Array 
 })
 
 const form = reactive({ title: '' })
-const tasks = reactive(props.tasks) // Initialize tasks with the prop
+const tasks = reactive(props.tasks) 
 
 // Add new task
 const submitTask = () => {
     router.post(route('tasks.store'), form, {
         onSuccess: () => {
             form.title = '';
-            fetchTasks(); // Re-fetch to update the list
+            fetchTasks(); 
         }
     })
 }
 
-// Update task completion status
+
 const toggleCompletion = (task) => {
     router.put(route('tasks.update', task.id), { completed: !task.completed }, {
         onSuccess: () => {
-            // No need to re-fetch here as we're updating optimistically
+            
         }
     })
-    task.completed = !task.completed // Update the task status optimistically
+    task.completed = !task.completed 
 }
 
 // Delete task
 const deleteTask = (task) => {
     router.delete(route('tasks.destroy', task.id), {
         onSuccess: () => {
-            tasks.splice(tasks.indexOf(task), 1) // Remove from list optimistically
+            tasks.splice(tasks.indexOf(task), 1) 
         }
     })
 }
 
-// Fetch tasks (for subsequent updates or direct navigation)
+
 const fetchTasks = () => {
     router.get(route('tasks.index'), {}, {
         onSuccess: (response) => {
@@ -72,7 +72,7 @@ const fetchTasks = () => {
     })
 }
 
-// Fetch tasks on mount if the prop is empty (direct navigation)
+
 onMounted(() => {
     if (props.tasks.length === 0) {
         fetchTasks();
