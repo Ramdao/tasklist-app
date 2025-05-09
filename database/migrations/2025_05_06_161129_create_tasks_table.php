@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->boolean('completed')->default(false);
+            $table->string('Assigned By');
+            $table->string('Assigned To');
+            $table->string('Priority');
+            $table->string('Status');
+            $table->date('Due Date');
             $table->timestamps();
         });
     }

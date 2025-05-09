@@ -22,8 +22,12 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'completed' => 'boolean',
-            'title' => 'string|max:255',
+            'title' => 'required|string|max:255',
+            'Assigned By' => 'required|string|max:255',
+            'Assigned To' => 'required|string|max:255',
+            'Priority' => 'required|string|max:255',
+            'Status' => 'required|string|max:255',
+            'Due Date' => 'required|date',
         ];
     }
 }
